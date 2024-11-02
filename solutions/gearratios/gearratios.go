@@ -3,7 +3,6 @@ package gearratios
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -13,7 +12,11 @@ import (
 var matrix [][]rune
 
 func Run(inputFile string) error {
-	content := loadSample(inputFile)
+	content, err := loadSample(inputFile)
+	if err != nil {
+		return nil
+	}
+
 	scanner := bufio.NewScanner(strings.NewReader(content))
 	parseSample(scanner)
 
@@ -58,12 +61,12 @@ func Run(inputFile string) error {
 	return nil
 }
 
-func loadSample(filename string) string {
+func loadSample(filename string) (string, error) {
 	content, err := os.ReadFile(filename)
 	if err != nil {
-		log.Fatalf("failed to load file: %s", err)
+		return "", fmt.Errorf("failed to load file: %s", err)
 	}
-	return string(content)
+	return string(content), nil
 }
 
 func parseSample(scanner *bufio.Scanner) {
