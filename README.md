@@ -1,7 +1,27 @@
-# AoC
+My solutions for [Advent of Code 2023](https://adventofcode.com/2023) in **Go**! ✨
 
-All my answers for [Advent of Code](https://adventofcode.com/2023) written in **Go**
+## Prerequisites
 
-Feel free to learn from it, just don't copy it, ehe~
+- Go (1.23.3)
 
-I mean you can copy it, but what's the point?
+## Building
+
+```bash
+go build .
+```
+
+## Usage
+
+```bash
+# Run a specific puzzle
+AoC trebuchet sample.txt
+```
+
+## Note
+
+Feel free to peek at my solutions for learning purposes~
+
+But remember:
+> Copying solutions is like using someone else's toothbrush - you can do it, but should you? 🤔
+
+Happy coding! 🚀
