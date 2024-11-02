@@ -1,41 +1,33 @@
-package main
+package cubeconundrum
 
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 	"strconv"
 	"strings"
 )
 
-// represents the number of cubes of each color
 type ColorCount struct {
 	Red   int `json:"red"`
 	Green int `json:"green"`
 	Blue  int `json:"blue"`
 }
 
-// Game represents a single game with its ID and rolls
 type Game struct {
 	GameID int            `json:"gameId"`
 	Rolls  [][]ColorCount `json:"rolls"`
 }
 
-func main() {
-	if len(os.Args) < 2 {
-		log.Fatalf("Too few arguments\nUsage: %s [sample_file]", os.Args[0])
-	}
-
-	content, err := os.ReadFile(os.Args[1])
-
+func Run(inputFile string) error {
+	content, err := os.ReadFile(inputFile)
 	if err != nil {
-		log.Fatalf("Failed to read file: %s", err)
+		return fmt.Errorf("error reading file: %v", err)
 	}
 
 	games, err := readSample(string(content))
 	if err != nil {
-		log.Fatalf("Failed to parse games: %v", err)
+		return fmt.Errorf("failed to parse games: %v", err)
 	}
 
 	sum := 0
@@ -49,8 +41,10 @@ func main() {
 		red, green, blue := getMinimumCubes(game)
 		power += red * green * blue
 	}
-	fmt.Printf("Part 1 - Sum of possible game IDs: %d\n", sum)
-	fmt.Printf("Part 2 - Sum of powers: %d\n", power)
+	fmt.Printf("Sum of possible game IDs: %d\n", sum)
+	fmt.Printf("Sum of powers: %d\n", power)
+
+	return nil
 }
 
 func readSample(content string) (map[int]Game, error) {

@@ -1,4 +1,4 @@
-package main
+package gearratios
 
 import (
 	"bufio"
@@ -12,19 +12,10 @@ import (
 
 var matrix [][]rune
 
-func main() {
-	if len(os.Args) < 2 {
-		log.Fatalf("Too few arguments\nUsage: %s [sample_file]", os.Args[0])
-	}
-
-	content := loadSample(os.Args[1])
+func Run(inputFile string) error {
+	content := loadSample(inputFile)
 	scanner := bufio.NewScanner(strings.NewReader(content))
 	parseSample(scanner)
-
-	// matrix[0] = ['4', '6', '7', '.', '.', '1', '1', '4', '.', '.']
-	// matrix[1] = ['.', '.', '.', '*', '.', '.', '.', '.', '.', '.']
-	// matrix[2] = ['.', '.', '3', '5', '.', '.', '6', '3', '3', '.']
-	// etc...
 
 	sum := 0
 	for row := 0; row < len(matrix); row++ {
@@ -62,8 +53,9 @@ func main() {
 			}
 		}
 	}
-	
+
 	fmt.Printf("Sum of part numbers: %d\n", sum)
+	return nil
 }
 
 func loadSample(filename string) string {

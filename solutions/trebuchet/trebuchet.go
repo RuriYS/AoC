@@ -1,32 +1,16 @@
-package main
+package trebuchet
 
 import (
 	"bufio"
-	"log"
+	"fmt"
 	"os"
 	"strings"
 )
 
-var wordToInt = map[string]int{
-	"one":   1,
-	"two":   2,
-	"three": 3,
-	"four":  4,
-	"five":  5,
-	"six":   6,
-	"seven": 7,
-	"eight": 8,
-	"nine":  9,
-}
-
-func main() {
-	if len(os.Args) < 2 {
-		log.Fatal("Please provide an input file")
-	}
-
-	content, err := os.ReadFile(os.Args[1])
+func Run(inputFile string) error {
+	content, err := os.ReadFile(inputFile)
 	if err != nil {
-		log.Fatal("Error reading file:", err)
+		return fmt.Errorf("error reading file: %v", err)
 	}
 
 	scanner := bufio.NewScanner(strings.NewReader(string(content)))
@@ -41,8 +25,9 @@ func main() {
 		}
 	}
 
-	log.Printf("Part 1 - Sum of digits: %d", sumDigits)
-	log.Printf("Part 2 - Sum of both: %d", sumBoth)
+	fmt.Printf("Sum of digits: %d\n", sumDigits)
+	fmt.Printf("Sum of both: %d\n", sumBoth)
+	return nil
 }
 
 func getCalibrationValue(nums []int) int {
@@ -75,4 +60,16 @@ func parseLine(line string) ([]int, []int) {
 	}
 
 	return digits, both
+}
+
+var wordToInt = map[string]int{
+	"one":   1,
+	"two":   2,
+	"three": 3,
+	"four":  4,
+	"five":  5,
+	"six":   6,
+	"seven": 7,
+	"eight": 8,
+	"nine":  9,
 }
