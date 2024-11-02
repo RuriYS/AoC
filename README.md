@@ -4,7 +4,7 @@ My solutions for [Advent of Code 2023](https://adventofcode.com/2023) in **Go**!
 
 ## Prerequisites
 
-- Go (1.23.3)
+- Go (1.23.2)
 
 ## Building
 
