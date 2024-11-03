@@ -1,0 +1,69 @@
+name: Go Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.23.2'
+        check-latest: true
+        cache: true
+
+    - name: Verify dependencies
+      run: go mod verify
+
+    - name: Build
+      run: |
+        go build -v -o AoC
+        # Make the binary executable
+        chmod +x AoC
+
+    - name: Run tests
+      run: go test -v ./...
+      
+    - name: Run vet
+      run: go vet ./...
+
+
+    - name: Upload binary artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: AoC-linux-amd64
+        path: AoC
+        retention-days: 90
+        if-no-files-found: error
+
+  # Add Windows build
+  build-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.23.2'
+        check-latest: true
+        cache: true
+
+    - name: Build Windows binary
+      run: go build -v -o AoC.exe
+
+    - name: Upload Windows binary artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: AoC-windows-amd64
+        path: AoC.exe
+        retention-days: 90
+        if-no-files-found: error
