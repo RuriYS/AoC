@@ -83,8 +83,8 @@ Fish:
   $ aoc completion fish > ~/.config/fish/completions/aoc.fish
 `,
 		DisableFlagsInUseLine: true,
-		ValidArgs:            []string{"bash", "zsh", "fish"},
-		Args:                cobra.ExactValidArgs(1),
+		ValidArgs:             []string{"bash", "zsh", "fish"},
+		Args:                  cobra.ExactValidArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
 			switch args[0] {
 			case "bash":
@@ -101,7 +101,7 @@ Fish:
 	for name, solution := range solutions {
 		puzzleName := name // Create a new variable to avoid closure issues
 		puzzleSolution := solution
-		
+
 		cmd := &cobra.Command{
 			Use:   puzzleName + " <input-file>",
 			Short: fmt.Sprintf("Run the %s puzzle", puzzleName),
@@ -114,11 +114,11 @@ Fish:
 					// When completing the input file argument, look in both current directory
 					// and solution directory for .txt files
 					var files []string
-					
+
 					// Look in current directory
 					matches, _ := filepath.Glob("*.txt")
 					files = append(files, matches...)
-					
+
 					// Look in solution directory
 					solutionPath := filepath.Join("solutions", puzzleSolution.solutionDir)
 					if matches, err := filepath.Glob(filepath.Join(solutionPath, "*.txt")); err == nil {
@@ -127,7 +127,7 @@ Fish:
 							files = append(files, filepath.Base(match))
 						}
 					}
-					
+
 					return files, cobra.ShellCompDirectiveDefault
 				}
 				return nil, cobra.ShellCompDirectiveDefault
