@@ -94,8 +94,8 @@ func Run(inputFile string) error {
 		}
 	}
 
-	fmt.Printf("Part 1 - Sum of part numbers: %d\n", part1Sum)
-	fmt.Printf("Part 2 - Sum of gear ratios: %d\n", part2Sum)
+	fmt.Printf("Sum of part numbers: %d\n", part1Sum)
+	fmt.Printf("Sum of gear ratios: %d\n", part2Sum)
 	return nil
 }
 
