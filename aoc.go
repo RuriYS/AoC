@@ -7,6 +7,7 @@ import (
 
 	"github.com/RuriYS/AoC/solutions/cubeconundrum"
 	"github.com/RuriYS/AoC/solutions/gearratios"
+	"github.com/RuriYS/AoC/solutions/scratchcards"
 	"github.com/RuriYS/AoC/solutions/trebuchet"
 	"github.com/spf13/cobra"
 )
@@ -33,6 +34,7 @@ var solutions = map[string]*PuzzleSolution{
 	"trebuchet":     {run: trebuchet.Run, solutionDir: "trebuchet"},
 	"cubeconundrum": {run: cubeconundrum.Run, solutionDir: "cubeconundrum"},
 	"gearratios":    {run: gearratios.Run, solutionDir: "gearratios"},
+	"scratchcards":  {run: scratchcards.Run, solutionDir: "scratchcards"},
 }
 
 func main() {
